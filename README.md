@@ -15,6 +15,10 @@ Sets the port to bind to.  Defaults to "8080"
 
 **DISABLE_LOGGING_COLOR**:
 Disables logging color when set to "true"
+
+**PASSWORD_MIN_LENGTH**: The minimum password length.  Defaults to 16
+
+**PASSWORD_MAX_LENGTH**: THe maximum password length.  Defaults to 512
     
 ## Administrative URIs
 
