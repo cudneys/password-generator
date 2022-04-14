@@ -1,0 +1,77 @@
+definitions:
+  models.RequestParams:
+    properties:
+      digits:
+        type: integer
+      length:
+        type: integer
+      symbols:
+        type: integer
+    type: object
+  models.Response:
+    properties:
+      error:
+        type: string
+      password:
+        type: string
+      request:
+        $ref: '#/definitions/models.RequestParams'
+    type: object
+  models.Version:
+    properties:
+      build_timestamp:
+        type: string
+      commit_hash:
+        type: string
+      version:
+        type: string
+    type: object
+info:
+  contact:
+    email: password-generator@cudneys.net
+    name: API Support
+    url: http://github.com/cudneys
+  description: This is a simple password generator
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Password Generator API
+  version: "1.0"
+paths:
+  /about:
+    get:
+      description: Returns Build Information For This Service
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Version'
+      summary: About Password Generator
+  /generate:
+    get:
+      description: Generates somewhat secure-ish passwords
+      parameters:
+      - description: Password Length
+        in: query
+        name: length
+        type: integer
+      - description: Num Digits
+        in: query
+        name: digits
+        type: integer
+      - description: Num Symbols
+        in: query
+        name: symbols
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Password Generator
+swagger: "2.0"

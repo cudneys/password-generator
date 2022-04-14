@@ -1,0 +1,118 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple password generator",
+        "title": "Password Generator API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://github.com/cudneys",
+            "email": "password-generator@cudneys.net"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/about": {
+            "get": {
+                "description": "Returns Build Information For This Service",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "About Password Generator",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Version"
+                        }
+                    }
+                }
+            }
+        },
+        "/generate": {
+            "get": {
+                "description": "Generates somewhat secure-ish passwords",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Password Generator",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Password Length",
+                        "name": "length",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Num Digits",
+                        "name": "digits",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Num Symbols",
+                        "name": "symbols",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.RequestParams": {
+            "type": "object",
+            "properties": {
+                "digits": {
+                    "type": "integer"
+                },
+                "length": {
+                    "type": "integer"
+                },
+                "symbols": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Response": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "request": {
+                    "$ref": "#/definitions/models.RequestParams"
+                }
+            }
+        },
+        "models.Version": {
+            "type": "object",
+            "properties": {
+                "build_timestamp": {
+                    "type": "string"
+                },
+                "commit_hash": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
