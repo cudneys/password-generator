@@ -17,15 +17,6 @@ definitions:
       request:
         $ref: '#/definitions/models.RequestParams'
     type: object
-  models.Version:
-    properties:
-      build_timestamp:
-        type: string
-      commit_hash:
-        type: string
-      version:
-        type: string
-    type: object
 info:
   contact:
     email: password-generator@cudneys.net
@@ -39,17 +30,6 @@ info:
   title: Password Generator API
   version: "1.0"
 paths:
-  /about:
-    get:
-      description: Returns Build Information For This Service
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Version'
-      summary: About Password Generator
   /generate:
     get:
       description: Generates somewhat secure-ish passwords

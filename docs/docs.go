@@ -25,23 +25,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/about": {
-            "get": {
-                "description": "Returns Build Information For This Service",
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "About Password Generator",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Version"
-                        }
-                    }
-                }
-            }
-        },
         "/generate": {
             "get": {
                 "description": "Generates somewhat secure-ish passwords",
@@ -106,20 +89,6 @@ const docTemplate = `{
                 },
                 "request": {
                     "$ref": "#/definitions/models.RequestParams"
-                }
-            }
-        },
-        "models.Version": {
-            "type": "object",
-            "properties": {
-                "build_timestamp": {
-                    "type": "string"
-                },
-                "commit_hash": {
-                    "type": "string"
-                },
-                "version": {
-                    "type": "string"
                 }
             }
         }

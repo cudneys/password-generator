@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"fmt"
+	"github.com/cudneys/password-generator/config"
 	"math/rand"
 	"time"
 )
@@ -14,20 +15,20 @@ type RequestParams struct {
 }
 
 func (r *RequestParams) Validate() error {
-	minLen := 16
-	maxLen := 1024
+	minLen := config.GetMinLen()
+	maxLen := config.GetMaxLen()
 
 	if r.Length == 0 {
 		rand.Seed(time.Now().UnixNano())
 		r.Length = minLen + rand.Intn(maxLen-minLen+1)
-	} else if r.Length < 16 {
-		return errors.New(fmt.Sprintf("Length (%d) is less than the minimum (16)", r.Length))
+	} else if r.Length < minLen {
+		return errors.New(fmt.Sprintf("Length (%d) is less than the minimum (%d)", r.Length, minLen))
 	}
 
 	if r.Digits == 0 {
 		r.Digits = int((r.Length / 3))
 	} else if r.Digits < int((r.Length / 3)) {
-		return errors.New(fmt.Sprintf("Digits (%d) is less than the minimum (16)", r.Digits))
+		return errors.New(fmt.Sprintf("Digits (%d) is less than the minimum (%d)", r.Digits, int((r.Length / 3))))
 	}
 
 	if r.Symbols == 0 {

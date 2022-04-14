@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	config "github.com/cudneys/password-generator/config"
 	models "github.com/cudneys/password-generator/models"
 	"github.com/gin-gonic/gin"
 	"github.com/sethvargo/go-password/password"
@@ -19,7 +20,7 @@ func getIntQP(c *gin.Context, key string, defaultValue string) (int, error) {
 }
 
 func getLength(c *gin.Context) (int, error) {
-	return getIntQP(c, "length", "16")
+	return getIntQP(c, "length", string(config.GetMinLen()))
 }
 
 func getDigits(c *gin.Context) (int, error) {
@@ -42,12 +43,6 @@ func getSymbols(c *gin.Context) (int, error) {
 // @Success 200 {object} models.Response
 // @Router /generate [get]
 func PasswordGenerator(c *gin.Context) {
-	//reqParams, err := getRequestParams(c)
-	//if err != nil {
-	//	c.String(http.StatusBadRequest, fmt.Sprintf("%s", err))
-	//	return
-	//}
-
 	var reqParams models.RequestParams
 
 	// Bind the request params

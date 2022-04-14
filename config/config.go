@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func GetEnvVarWithDefault(key, defaultValue string) string {
@@ -23,6 +24,24 @@ func GetHost() string {
 
 func GetPort() string {
 	return GetEnvVarWithDefault("BIND_PORT", "8080")
+}
+
+func GetMinLen() int {
+	val := GetEnvVarWithDefault("PASSWORD_MIN_LENGTH", "16")
+	iVal, err := strconv.Atoi(val)
+	if err != nil {
+		iVal = 16
+	}
+	return iVal
+}
+
+func GetMaxLen() int {
+	val := GetEnvVarWithDefault("PASSWORD_MAX_LENGTH", "512")
+	iVal, err := strconv.Atoi(val)
+	if err != nil {
+		iVal = 512
+	}
+	return iVal
 }
 
 func GetBindHost() string {

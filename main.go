@@ -11,6 +11,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
+	"time"
 )
 
 var (
@@ -55,16 +56,17 @@ func main() {
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.GET("/about", aboutHandler)
+	r.GET("/liveness", livenessHandler)
 	r.Run(bindHost)
 }
 
-// passwordGenerator godoc
-// @Summary About Password Generator
-// @Schemes
-// @Description Returns Build Information For This Service
-// @Produce json
-// @Success 200 {object} models.Version
-// @Router /about [get]
+func livenessHandler(c *gin.Context) {
+	c.JSON(
+		http.StatusOK,
+		models.Liveness{Status: "OK", Timestamp: time.Time.Format(time.Now(), "2006-01-02T15:04:05")},
+	)
+}
+
 func aboutHandler(c *gin.Context) {
 	c.JSON(
 		http.StatusOK,
