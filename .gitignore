@@ -16,3 +16,8 @@
 
 .idea/
 dist
+dist/darwin/and64/server
+dist/darwin/and64/server
+dist/darwin/m1/server
+dist/linux/amd64/server
+dist/linux/arm/server
