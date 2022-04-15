@@ -15,7 +15,7 @@ prep:
 	mkdir -p dist/linux/arm
 	mkdir -p dist/darwin/amd64
 	mkdir -p dist/darwin/m1
-	mkdir -p windows/amd64
+	mkdir -p dist/windows/amd64
 
 build: clean prep
 	swag init
