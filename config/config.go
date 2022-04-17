@@ -57,3 +57,4 @@ func GetLogColorEnabled() bool {
 	}
 	return enabled
 }
+
