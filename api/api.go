@@ -20,7 +20,7 @@ func getIntQP(c *gin.Context, key string, defaultValue string) (int, error) {
 }
 
 func getLength(c *gin.Context) (int, error) {
-	return getIntQP(c, "length", string(config.GetMinLen()))
+	return getIntQP(c, "length", fmt.Sprint(config.GetMinLen()))
 }
 
 func getDigits(c *gin.Context) (int, error) {

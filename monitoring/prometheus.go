@@ -57,7 +57,7 @@ func (p *Prometheus) registerMetrics(subsystem string) {
 		reqCnt.Args,
 	)
 	if err := prometheus.Register(metric); err != nil {
-		log.Print(fmt.Sprintf("%s could not be registered: ", reqCnt, err))
+		log.Print(fmt.Sprintf("%s could not be registered: %s", reqCnt, err))
 	} else {
 		log.Print(fmt.Sprintf("%s registered.", reqCnt))
 	}
